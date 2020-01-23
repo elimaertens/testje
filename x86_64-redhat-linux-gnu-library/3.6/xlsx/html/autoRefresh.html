@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Force Refresh Pivot Tables and Formulae</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for ForceRefresh {xlsx}"><tr><td>ForceRefresh {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Force Refresh Pivot Tables and Formulae</h2>
+
+<h3>Description</h3>
+
+<p>Functions to force formula calculation or refresh of pivot tables when the Excel file is opened.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+forcePivotTableRefresh(file, output=NULL, verbose=FALSE)
+
+forceFormulaRefresh(file, output=NULL, verbose=FALSE)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>the path of the source file where formulae/pivot table needs to be refreshed</p>
+</td></tr>
+<tr valign="top"><td><code>output</code></td>
+<td>
+<p>the path of the output file.  If it is <code>NULL</code> then the source 
+file will be overwritten.</p>
+</td></tr>
+<tr valign="top"><td><code>verbose</code></td>
+<td>
+<p>a boolean.  Set to <code>TRUE</code> if you want details.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>forcePivotTableRefresh</code> forces pivot tables to be refreshed when the Excel file is opened.
+</p>
+<p><code>forceFormulaRefresh</code> forces formulae to be recalculated when the Excel file is opened.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>forcePivotTableRefresh</code> does not return any results
+</p>
+<p><code>forceFormulaRefresh</code> does not return any results
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tom Kwong</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# Patch a file where its pivot tables are not recalculated when the file is opened
+forcePivotTableRefresh("/tmp/file.xlsx")
+forcePivotTableRefresh("/tmp/file.xlsx", "/tmp/fixed_file.xlsx")
+
+# Patch a file where its formulae are not recalculated when the file is opened
+forceFormulaRefresh("/tmp/file.xlsx")
+forceFormulaRefresh("/tmp/file.xlsx", "/tmp/fixed_file.xlsx")
+
+## End(Not run)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

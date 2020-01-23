@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to manipulate rows of a worksheet.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Row {xlsx}"><tr><td>Row {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to manipulate rows of a worksheet.</h2>
+
+<h3>Description</h3>
+
+<p>Functions to manipulate rows of a worksheet. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+createRow(sheet, rowIndex=1:5)
+
+getRows(sheet, rowIndex=NULL)
+
+removeRow(sheet, rows=NULL)
+
+setRowHeight(rows, inPoints, multiplier=NULL)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+<p>a worksheet object as returned by <code>createSheet</code> or
+by subsetting <code>getSheets</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rowIndex</code></td>
+<td>
+<p>a numeric vector specifying the index of rows to
+create.  For <code>getRows</code>, a <code>NULL</code> value will return all
+non empty rows.</p>
+</td></tr>
+<tr valign="top"><td><code>rows</code></td>
+<td>
+<p>a list of <code>Row</code> objects.</p>
+</td></tr>
+<tr valign="top"><td><code>inPoints</code></td>
+<td>
+<p>a numeric value to specify the height of the row in
+points.</p>
+</td></tr>
+<tr valign="top"><td><code>multiplier</code></td>
+<td>
+<p>a numeric value to specify the multiple of default
+row height in points.  If this value is set, it takes precedence
+over the <code>inPoints</code> argument.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>removeRow</code> is just a convenience wrapper to remove the rows from
+the sheet (before saving).  Internally it calls <code>lapply</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>getRows</code> a list of java object references each  pointing to
+a row.  The list is named with the row number.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p>To extract the cells from a given row, see <code><a href="Cell.html">Cell</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+file &lt;- system.file("tests", "test_import.xlsx", package = "xlsx")
+
+wb &lt;- loadWorkbook(file)  
+sheets &lt;- getSheets(wb)
+
+sheet &lt;- sheets[[2]]  
+rows  &lt;- getRows(sheet)  # get all the rows
+
+# see all the available java methods that you can call
+#.jmethods(rows[[1]])
+
+# for example
+rows[[1]]$getRowNum()   # zero based index in Java
+
+removeRow(sheet, rows)  # remove them all
+
+# create some row
+rows  &lt;- createRow(sheet, rowIndex=1:5)
+setRowHeight( rows, multiplier=3)  # 3 times bigger rows than the default
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

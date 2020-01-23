@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Write a data.frame to an Excel workbook.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for write.xlsx {xlsx}"><tr><td>write.xlsx {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Write a data.frame to an Excel workbook.</h2>
+
+<h3>Description</h3>
+
+<p>Write a <code>data.frame</code> to an Excel workbook.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+write.xlsx(x, file, sheetName="Sheet1", 
+  col.names=TRUE, row.names=TRUE, append=FALSE, showNA=TRUE, password=NULL)
+
+write.xlsx2(x, file, sheetName="Sheet1",
+  col.names=TRUE, row.names=TRUE, append=FALSE, password=NULL, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <code>data.frame</code> to write to the workbook.</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>the path to the output file.</p>
+</td></tr>
+<tr valign="top"><td><code>sheetName</code></td>
+<td>
+<p>a character string with the sheet name.</p>
+</td></tr>
+<tr valign="top"><td><code>col.names</code></td>
+<td>
+<p>a logical value indicating if the column names of
+<code>x</code> are to be written along with <code>x</code> to the file.</p>
+</td></tr>
+<tr valign="top"><td><code>row.names</code></td>
+<td>
+<p>a logical value indicating whether the row names of 
+<code>x</code> are to be written along with <code>x</code> to the file.</p>
+</td></tr>
+<tr valign="top"><td><code>append</code></td>
+<td>
+<p>a logical value indicating if <code>x</code> should be
+appended to an existing file.  If <code>TRUE</code> the file is read
+from disk.</p>
+</td></tr>
+<tr valign="top"><td><code>showNA</code></td>
+<td>
+<p>a logical value.  If set to <code>FALSE</code>, NA values will
+be left as empty cells. </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to <code>addDataFrame</code> in the case of
+<code>read.xlsx2</code>.</p>
+</td></tr> 
+<tr valign="top"><td><code>password</code></td>
+<td>
+<p>a String with the password.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function provides a high level API for writing a <code>data.frame</code>
+to an Excel 2007 worksheet.  It calls several low level functions in the
+process.  Its goal is to provide the conveniency of
+<code><a href="../../utils/html/write.csv.html">write.csv</a></code> by borrowing from its signature.
+</p>
+<p>Internally, <code>write.xlsx</code> uses a double loop in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> over all the
+elements of the <code>data.frame</code> so performance for very large
+<code>data.frame</code> may be an issue.  Please report if you experience slow
+performance.  Dates and POSIXct classes are formatted separately after
+the insertion.  This also adds to processing time.
+</p>
+<p>If <code>x</code> is not a <code>data.frame</code> it will be converted to one.
+</p>
+<p>Function <code>write.xlsx2</code> uses <code>addDataFrame</code> which speeds up the
+execution compared to <code>write.xlsx</code> by an order of magnitude for
+large spreadsheets (with more than 100,000 cells).
+</p>
+<p>The default formats for Date and DateTime columns can be changed via the
+two package options <code>xlsx.date.format</code> and
+<code>xlsx.datetime.format</code>.  They need to be specified in Java date
+format
+<a href="http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html">http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html</a>.
+</p>
+<p>Writing of password protected workbooks is supported for
+Excel 2007 OOXML format only.  Note that in Linux, LibreOffice is not
+able to read password protected spreadsheets. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Adrian Dragulescu </p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="read.xlsx.html">read.xlsx</a></code> for reading <code>xlsx</code> documents.
+See also <code><a href="addDataFrame.html">addDataFrame</a></code> for writing a <code>data.frame</code> to a
+sheet.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+
+file &lt;- paste(tempdir(), "/usarrests.xlsx", sep="")
+res &lt;- write.xlsx(USArrests, file)  
+
+# to change the default date format
+oldOpt &lt;- options()
+options(xlsx.date.format="dd MMM, yyyy")
+write.xlsx(x, sheet) # where x is a data.frame with a Date column.
+options(oldOpt)      # revert back to defaults
+ 
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

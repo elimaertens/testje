@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a hyperlink to a cell.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addHyperlink {xlsx}"><tr><td>addHyperlink {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a hyperlink to a cell.</h2>
+
+<h3>Description</h3>
+
+<p>Add a hyperlink to a cell to point to an external resource.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+addHyperlink(cell, address, linkType=c("URL", "DOCUMENT",
+  "EMAIL", "FILE"), hyperlinkStyle=NULL)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cell</code></td>
+<td>
+<p>a <code><a href="Cell.html">Cell</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>address</code></td>
+<td>
+<p>a string pointing to the resource.</p>
+</td></tr>
+<tr valign="top"><td><code>linkType</code></td>
+<td>
+<p>a the type of the resource.</p>
+</td></tr>
+<tr valign="top"><td><code>hyperlinkStyle</code></td>
+<td>
+<p>a <code><a href="CellStyle.html">CellStyle</a></code> object.  If
+<code>NULL</code> a default cell style is created, blue underlined font.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The cell needs to have content before you add a hyperlink to it.  The
+contents of the cells don't need to be the same as the address of the
+hyperlink.  See the examples. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>None.  The modification to the cell is done in place. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  wb &lt;- createWorkbook()
+  sheet1 &lt;- createSheet(wb, "Sheet1")
+  rows   &lt;- createRow(sheet1, 1:10)              # 10 rows
+  cells  &lt;- createCell(rows, colIndex=1:8)       # 8 columns
+
+  cat("Add hyperlinks to a cell")
+  cell &lt;- cells[[1,1]]
+  address &lt;- "http://poi.apache.org/"
+  setCellValue(cell, "click me!")  
+  addHyperlink(cell, address)
+  
+  # Don't forget to save the workbook ...  
+ 
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create and style a block of cells.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for CellBlock {xlsx}"><tr><td>CellBlock {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create and style a block of cells.</h2>
+
+<h3>Description</h3>
+
+<p>Functions to create and style (not read) a block of cells.  Use it to 
+set/update cell values and cell styles in an efficient manner.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+## Default S3 method:
+CellBlock(sheet, startRow, startColumn, noRows, noColumns,
+  create=TRUE)
+
+is.CellBlock( cellBlock )
+
+CB.setColData(cellBlock, x, colIndex, rowOffset=0, showNA=TRUE,
+  colStyle=NULL)
+
+CB.setRowData(cellBlock, x, rowIndex, colOffset=0, showNA=TRUE,
+  rowStyle=NULL)
+
+CB.setMatrixData(cellBlock, x, startRow, startColumn,
+  showNA=TRUE, cellStyle=NULL)
+
+CB.setFill( cellBlock, fill, rowIndex, colIndex)
+
+CB.setFont( cellBlock, font, rowIndex, colIndex )
+
+CB.setBorder( cellBlock, border, rowIndex, colIndex)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+<p>a <code><a href="Sheet.html">Sheet</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>startRow</code></td>
+<td>
+<p>a numeric value for the starting row.</p>
+</td></tr>
+<tr valign="top"><td><code>startColumn</code></td>
+<td>
+<p>a numeric value for the starting column.</p>
+</td></tr>
+<tr valign="top"><td><code>rowOffset</code></td>
+<td>
+<p>a numeric value for the starting row.</p>
+</td></tr>
+<tr valign="top"><td><code>colOffset</code></td>
+<td>
+<p>a numeric value for the starting column.</p>
+</td></tr>
+<tr valign="top"><td><code>showNA</code></td>
+<td>
+<p>a logical value.  If set to <code>FALSE</code>, NA values will
+be left as empty cells. </p>
+</td></tr>
+<tr valign="top"><td><code>noRows</code></td>
+<td>
+<p>a numeric value to specify the number of rows for the block.</p>
+</td></tr>
+<tr valign="top"><td><code>noColumns</code></td>
+<td>
+<p>a numeric value to specify the number of columns for
+the block.</p>
+</td></tr>
+<tr valign="top"><td><code>create</code></td>
+<td>
+<p> If <code>TRUE</code> cells will be created if they don't
+exist, if <code>FALSE</code> only existing cells will be used.  If cells
+don't exist (on a new sheet for example), you have to use
+<code>TRUE</code>.  On an existing sheet with data, use <code>TRUE</code> if you
+want to blank out an existing cell block.  Use <code>FALSE</code> if you
+want to keep the styling of existing cells, but just modify the
+value of the cell.</p>
+</td></tr>
+<tr valign="top"><td><code>cellBlock</code></td>
+<td>
+<p> a cell block object as returned by
+<code><a href="CellBlock.html">CellBlock</a></code>. </p>
+</td></tr>
+<tr valign="top"><td><code>rowStyle</code></td>
+<td>
+<p>a <code><a href="CellStyle.html">CellStyle</a></code> object used to style the row.</p>
+</td></tr>
+<tr valign="top"><td><code>colStyle</code></td>
+<td>
+<p>a <code><a href="CellStyle.html">CellStyle</a></code> object used to style the column.</p>
+</td></tr>
+<tr valign="top"><td><code>cellStyle</code></td>
+<td>
+<p>a <code><a href="CellStyle.html">CellStyle</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>border</code></td>
+<td>
+<p>a Border object, as returned by <code><a href="Border.html">Border</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>a Fill object, as returned by <code><a href="Fill.html">Fill</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>font</code></td>
+<td>
+<p>a Font object, as returned by <code><a href="Font.html">Font</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>colIndex</code></td>
+<td>
+<p>a numeric vector specifiying the columns you want
+relative to the <code>startColumn</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rowIndex</code></td>
+<td>
+<p>a numeric vector specifiying the rows you want
+relative to the <code>startRow</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>the data you want to add to the cell block, a vector or a
+matrix depending on the function.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Introduced in version 0.5.0 of the package, these functions speed up
+the creation and styling of cells that are part of a &quot;cell block&quot; (a
+rectangular shaped group of cells).  Use the functions above if you
+want to create efficiently a complex sheet with many styles.  A simple
+by-column styling can be done by directly using
+<code><a href="addDataFrame.html">addDataFrame</a></code>.  With the functionality provided here you
+can efficiently style individual cells, see the example.
+</p>
+<p>It is difficult to treat <code>NA</code>'s consistently between R
+and Excel via Java.  Most likely, users of Excel will want to see
+<code>NA</code>'s  as blank cells.  In R character <code>NA</code>'s are simply
+characters, which for Excel means &quot;NA&quot;.
+</p>
+<p>If you try to set more data to the block than you have cells in the
+block, only the existing cells will be set.
+</p>
+<p>Note that when modifying the style of a group of cells, the changes
+are made to the pairs defined by <code>(rowIndex, colIndex)</code>.  This
+implies that the length of <code>rowIndex</code> and <code>colIndex</code> are the
+same value.  An exception is made when either <code>rowIndex</code> or
+<code>colIndex</code> have length one, when they will be expanded internally
+to match the length of the other index.
+</p>
+<p>Function <code>CB.setMatrixData</code> works for numeric or character
+matrices.  If the matrix <code>x</code> is not of numeric type it will be
+converted to a character matrix.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>CellBlock</code> a cell block object. 
+</p>
+<p>For <code>CB.setColData</code>, <code>CB.setRowData</code>,
+<code>CB.setMatrixData</code>, <code>CB.setFill</code>, <code>CB.setFont</code>,
+<code>CB.setBorder</code> nothing as he modification to the workbook is done
+in place.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+  wb &lt;- createWorkbook()
+  sheet  &lt;- createSheet(wb, sheetName="CellBlock")
+
+  cb &lt;- CellBlock(sheet, 7, 3, 1000, 60)
+  CB.setColData(cb, 1:100, 1)    # set a column
+  CB.setRowData(cb, 1:50, 1)     # set a row
+
+  # add a matrix, and style it
+  cs &lt;- CellStyle(wb) + DataFormat("#,##0.00")
+  x  &lt;- matrix(rnorm(900*45), nrow=900)
+  CB.setMatrixData(cb, x, 10, 4, cellStyle=cs)  
+
+  # highlight the negative numbers in red 
+  fill &lt;- Fill(foregroundColor = "red", backgroundColor="red")
+  ind  &lt;- which(x &lt; 0, arr.ind=TRUE)
+  CB.setFill(cb, fill, ind[,1]+9, ind[,2]+3)  # note the indices offset
+
+  # set the border on the top row of the Cell Block
+  border &lt;-  Border(color="blue", position=c("TOP", "BOTTOM"),
+    pen=c("BORDER_THIN", "BORDER_THICK"))
+  CB.setBorder(cb, border, 1:1000, 1)
+
+
+  # Don't forget to save the workbook ...  
+  # saveWorkbook(wb, file) 
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

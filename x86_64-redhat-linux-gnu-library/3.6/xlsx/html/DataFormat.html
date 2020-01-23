@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an DataFormat object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for DataFormat {xlsx}"><tr><td>DataFormat {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create an DataFormat object.</h2>
+
+<h3>Description</h3>
+
+<p>Create an DataFormat object, useful when working with cell styles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+DataFormat(x)
+
+is.DataFormat(df)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a character value specifying the data format.</p>
+</td></tr>
+<tr valign="top"><td><code>df</code></td>
+<td>
+<p>An DataFormat object, as returned by <code>DataFormat</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Specifying the <code>dataFormat</code> argument allows you to format the
+cell.  For example, &quot;#,##0.00&quot; corresponds to using a comma separator
+for powers of 1000 with two decimal places, &quot;m/d/yyyy&quot; can be used to
+format dates and is the equivalent of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s MM/DD/YYYY format.  To
+format datetimes use &quot;m/d/yyyy h:mm:ss;@&quot;.  To show negative values in
+red within parantheses with two decimals and commas after power of
+1000 use &quot;#,##0.00_);[Red](#,##0.00)&quot;.  I am not aware of an official
+way to discover these strings.  I find them out by recording a macro
+that formats a specific cell and then checking out the resulting VBA
+code.  From there you can read the <code>dataFormat</code> code.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>DataFormat</code> returns a list one component dataFormat, and a class
+attribute &quot;DataFormat&quot;.  DataFormat objects are used when constructing
+cell styles. 
+</p>
+<p><code>is.DataFormat</code> returns <code>TRUE</code> if the argument is of class
+&quot;DataFormat&quot; and <code>FALSE</code> otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="CellStyle.html">CellStyle</a></code> for using the a <code>DataFormat</code> object.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  df &lt;-  DataFormat("#,##0.00")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

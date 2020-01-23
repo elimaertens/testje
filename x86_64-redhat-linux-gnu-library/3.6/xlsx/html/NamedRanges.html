@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to manipulate named ranges.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for NamedRanges {xlsx}"><tr><td>NamedRanges {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to manipulate named ranges.</h2>
+
+<h3>Description</h3>
+
+<p>Functions to manipulate (contiguous) named ranges. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+getRanges(wb)
+
+readRange(range, sheet, colClasses="character")
+
+createRange(rangeName, firstCell, lastCell)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>wb</code></td>
+<td>
+<p>a workbook object as returned by <code>createWorksheet</code> or
+<code>loadWorksheet</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>range</code></td>
+<td>
+<p>a range object as returned by <code>getRanges</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+<p>a sheet object as returned by <code>getSheets</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>rangeName</code></td>
+<td>
+<p>a character specifying the name of the name to
+create.</p>
+</td></tr>
+<tr valign="top"><td><code>colClasses</code></td>
+<td>
+<p>the type of the columns supported.  Only
+<code>numeric</code> and <code>character</code> are supported.  See
+<code><a href="read.xlsx.html">read.xlsx2</a></code> for more details.</p>
+</td></tr>
+<tr valign="top"><td><code>firstCell</code></td>
+<td>
+<p>a cell object corresponding to the top left cell in
+the range.</p>
+</td></tr>
+<tr valign="top"><td><code>lastCell</code></td>
+<td>
+<p>a cell object corresponding to the bottom right cell in
+the range.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions are provided for convenience only.  Use directly the
+Java API to access additional functionality.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>getRanges</code> returns the existing ranges as a list.
+</p>
+<p><code>readRange</code> reads the range into a data.frame.
+</p>
+<p><code>createRange</code> returns the created range object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+file &lt;- system.file("tests", "test_import.xlsx", package = "xlsx")
+wb &lt;- loadWorkbook(file)
+sheet &lt;- getSheets(wb)[["deletedFields"]]  
+ranges &lt;- getRanges(wb)
+
+ranges[[1]]$getNameName()  # get its name
+
+# see all the available java methods that you can call
+.jmethods(ranges[[1]])
+
+# create a new named range
+firstCell &lt;- sheet$getRow(14L)$getCell(4L)
+lastCell  &lt;- sheet$getRow(20L)$getCell(7L)
+rangeName &lt;- "Test2"
+createRange(rangeName, firstCell, lastCell)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

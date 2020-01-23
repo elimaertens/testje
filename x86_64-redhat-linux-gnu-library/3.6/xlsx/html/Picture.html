@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to manipulate images in a spreadsheet.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Picture {xlsx}"><tr><td>Picture {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to manipulate images in a spreadsheet.</h2>
+
+<h3>Description</h3>
+
+<p>Functions to manipulate images in a spreadsheet. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+addPicture(file, sheet, scale=1, startRow=1, startColumn=1)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>the absolute path to the image file.</p>
+</td></tr>
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+<p>a worksheet object as returned by <code>createSheet</code> or
+by subsetting <code>getSheets</code>.  The picture will be added on this
+sheet at position <code>startRow</code>, <code>startColumn</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>scale</code></td>
+<td>
+<p>a numeric specifying the scale factor for the image.</p>
+</td></tr>
+<tr valign="top"><td><code>startRow</code></td>
+<td>
+<p>a numeric specifying the row of the upper left corner
+of the image.</p>
+</td></tr>
+<tr valign="top"><td><code>startColumn</code></td>
+<td>
+<p>a numeric specifying the column of the upper left corner
+of the image.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>For now, the following image types are supported: dib, emf, jpeg,
+pict, png, wmf.  Please note, that scaling works correctly only
+for workbooks with the default font size (Calibri 11pt for .xlsx). If
+the default font is changed the resized image can be streched
+vertically or horizontally.
+</p>
+<p>Don't know how to remove an existing image yet.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>addPicture</code> a java object references pointing to the picture.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+file &lt;- system.file("tests", "log_plot.jpeg", package = "xlsx")
+
+wb &lt;- createWorkbook()  
+sheet &lt;- createSheet(wb, "Sheet1")
+
+addPicture(file, sheet)
+
+# don't forget to save the workbook!
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

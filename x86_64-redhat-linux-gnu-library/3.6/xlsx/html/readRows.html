@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Read a contiguous set of rows into an R matrix</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for readRows {xlsx}"><tr><td>readRows {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Read a contiguous set of rows into an R matrix</h2>
+
+<h3>Description</h3>
+
+<p>Read a contiguous set of rows into an R character matrix.
+Uses the <code>RInterface</code> for speed.   
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+readRows(sheet, startRow, endRow, startColumn,
+  endColumn=NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+<p>a <code><a href="Sheet.html">Worksheet</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>startRow</code></td>
+<td>
+<p>a numeric value for the starting row.</p>
+</td></tr>
+<tr valign="top"><td><code>endRow</code></td>
+<td>
+<p>a numeric value for the ending row.  If <code>NULL</code> it
+reads all the rows in the sheet. </p>
+</td></tr>
+<tr valign="top"><td><code>startColumn</code></td>
+<td>
+<p>a numeric value for the starting column.</p>
+</td></tr>
+<tr valign="top"><td><code>endColumn</code></td>
+<td>
+<p>a numeric value for the ending column.  Empty cells
+will be returned as &quot;&quot;.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Use the <code>readRows</code> function when you want to read a row or a block
+block of data from an Excel worksheet.  Internally, the loop over
+rows is done in R, and the loop over columns is done in Java, so this
+function achieves good performance when number of rows &lt;&lt; number of
+columns.
+</p>
+<p>In general, you should prefer the function <code><a href="readColumns.html">readColumns</a></code>
+over this one.   
+</p>
+
+
+<h3>Value</h3>
+
+<p>A character matrix. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Adrian Dragulescu </p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="read.xlsx.html">read.xlsx2</a></code> for reading entire sheets.
+See also <code><a href="addDataFrame.html">addDataFrame</a></code> for writing a <code>data.frame</code> to a
+sheet.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+
+  file &lt;- system.file("tests", "test_import.xlsx", package = "xlsx")
+
+  wb     &lt;- loadWorkbook(file)
+  sheets &lt;- getSheets(wb)
+
+  sheet &lt;- sheets[["all"]]
+  res &lt;- readRows(sheet, startRow=3, endRow=7, startColumn=3, endColumn=10)
+
+ 
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

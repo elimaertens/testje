@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to manipulate Excel 2007 workbooks.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Workbook {xlsx}"><tr><td>Workbook {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to manipulate Excel 2007 workbooks.</h2>
+
+<h3>Description</h3>
+
+<p>Functions to manipulate Excel 2007 workbooks. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+createWorkbook(type="xlsx")
+
+loadWorkbook(file, password=NULL)
+
+saveWorkbook(wb, file, password=NULL)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>type</code></td>
+<td>
+<p>a String, either <code>xlsx</code> for Excel 2007 OOXML format,
+or <code>xls</code> for Excel 95 binary format.</p>
+</td></tr>
+<tr valign="top"><td><code>file</code></td>
+<td>
+<p>the path to the file you intend to read or write.
+Can be an xls or xlsx format.</p>
+</td></tr>
+<tr valign="top"><td><code>wb</code></td>
+<td>
+<p>a workbook object as returned by <code>createWorkbook</code> or
+<code>loadWorkbook</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>password</code></td>
+<td>
+<p>a String with the password.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>createWorkbook</code> creates an empty workbook object.
+</p>
+<p><code>loadWorkbook</code> loads a workbook from a file.
+</p>
+<p><code>saveWorkbook</code> saves an existing workook to an Excel 2007 file.
+</p>
+<p>Reading or writing of password protected workbooks is supported for
+Excel 2007 OOXML format only.  Note that in Linux, LibreOffice is not
+able to read password protected spreadsheets. 
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>createWorkbook</code> returns a java object reference pointing to an 
+empty workbook object.
+</p>
+<p><code>loadWorkbook</code> creates a java object reference corresponding to
+the file to load.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="write.xlsx.html">write.xlsx</a></code> for writing a <code>data.frame</code> to an
+<code>xlsx</code> file.  <code><a href="read.xlsx.html">read.xlsx</a></code> for reading the content of
+a <code>xlsx</code> worksheet into a <code>data.frame</code>.  To extract
+worksheets and manipulate them, see <code><a href="Sheet.html">Worksheet</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+wb &lt;- createWorkbook()
+
+# see all the available java methods that you can call
+#.jmethods(wb)
+
+# for example
+wb$getNumberOfSheets()   # no sheet yet!
+
+# loadWorkbook("C:/Temp/myFile.xls")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

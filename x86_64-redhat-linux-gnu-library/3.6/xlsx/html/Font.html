@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a Font object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Font {xlsx}"><tr><td>Font {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a Font object.</h2>
+
+<h3>Description</h3>
+
+<p>Create a Font object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+Font(wb, color=NULL, heightInPoints=NULL, name=NULL,
+  isItalic=FALSE, isStrikeout=FALSE, isBold=FALSE, underline=NULL,
+  boldweight=NULL)
+
+is.Font(x)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>wb</code></td>
+<td>
+<p>a workbook object as returned by
+<code><a href="Workbook.html">createWorkbook</a></code> or <code><a href="Workbook.html">loadWorkbook</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>a character specifiying the font color.  Any
+color names as returned by <code><a href="../../grDevices/html/colors.html">colors</a></code> can be
+used.  Or, a hex character, e.g. &quot;#FF0000&quot; for red.  For Excel 95
+workbooks, only a subset of colors is available, see the constant
+<code>INDEXED_COLORS_</code>.</p>
+</td></tr> 
+<tr valign="top"><td><code>heightInPoints</code></td>
+<td>
+<p>a numeric value specifying the font height.
+Usual values are 10, 12, 14, etc.</p>
+</td></tr>
+<tr valign="top"><td><code>name</code></td>
+<td>
+<p>a character value for the font to use.  All values that
+you see in Excel should be available, e.g. &quot;Courier New&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>isItalic</code></td>
+<td>
+<p>a logical indicating the font should be italic.</p>
+</td></tr>
+<tr valign="top"><td><code>isStrikeout</code></td>
+<td>
+<p>a logical indicating the font should be stiked out.</p>
+</td></tr>
+<tr valign="top"><td><code>isBold</code></td>
+<td>
+<p>a logical indicating the font should be bold.</p>
+</td></tr>
+<tr valign="top"><td><code>underline</code></td>
+<td>
+<p>a numeric value specifying the thickness of the
+underline.  Allowed values are 0, 1, 2.</p>
+</td></tr>
+<tr valign="top"><td><code>boldweight</code></td>
+<td>
+<p>a numeric value indicating bold weight.  Normal is
+400, regular bold is 700. </p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A Font object, as returned by <code>Font</code>. </p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments get passed to <code>Font</code>.</p>
+</td></tr> 
+</table>
+
+
+<h3>Details</h3>
+
+<p>Default values for <code>NULL</code> parameters are taken from Excel.  So
+the default font color is black, the default font name is &quot;Calibri&quot;, and
+the font height in points is 11.
+</p>
+<p>For Excel 95/2000/XP/2003, it is impossible to set the font to bold.
+This limitation may be removed in the future.  
+</p>
+<p>NOTE: You need to have a <code>Workbook</code> object to attach a
+<code>Font</code> object to it.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>Font</code> returns a list with a java reference to a
+<code>Font</code> object, and a class attribute &quot;Font&quot;.
+</p>
+<p><code>is.Font</code> returns <code>TRUE</code> if the argument is of class
+&quot;Font&quot; and <code>FALSE</code> otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="CellStyle.html">CellStyle</a></code> for using the a <code>Font</code> object.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+  font &lt;-  Font(wb, color="blue", isItalic=TRUE)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

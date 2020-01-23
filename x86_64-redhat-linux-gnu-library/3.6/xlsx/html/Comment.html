@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to manipulate cell comments.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Comment {xlsx}"><tr><td>Comment {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to manipulate cell comments.</h2>
+
+<h3>Description</h3>
+
+<p>Functions to manipulate cell comments. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+createCellComment(cell, string="", author=NULL, visible=TRUE)
+
+getCellComment(cell)
+
+removeCellComment(cell)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cell</code></td>
+<td>
+<p>a <code>Cell</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>string</code></td>
+<td>
+<p>a string for the comment.</p>
+</td></tr>
+<tr valign="top"><td><code>author</code></td>
+<td>
+<p>a string with the author's name</p>
+</td></tr>
+<tr valign="top"><td><code>visible</code></td>
+<td>
+<p>a logical value.  If <code>TRUE</code> the comment will be visible.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>These functions are not vectorized. 
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>createCellComment</code> creates a <code>Comment</code> object.
+</p>
+<p><code>getCellComment</code> returns a the <code>Comment</code> object if it
+exists. 
+</p>
+<p><code>removeCellComment</code> removes a comment from the given cell. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p>For cells, see <code><a href="Cell.html">Cell</a></code>.  To format cells, see
+<code><a href="CellStyle.html">CellStyle</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  wb &lt;- createWorkbook()
+  sheet1 &lt;- createSheet(wb, "Sheet1")
+  rows   &lt;- createRow(sheet1, rowIndex=1:10)     # 10 rows
+  cells  &lt;- createCell(rows, colIndex=1:8)       # 8 columns
+
+  cell1 &lt;- cells[[1,1]]
+  setCellValue(cell1, 1)   # add value 1 to cell A1
+
+  # create a cell comment
+  createCellComment(cell1, "Cogito", author="Descartes")
+  
+
+  # extract the comments 
+  comment &lt;- getCellComment(cell1)
+  stopifnot(comment$getAuthor()=="Descartes")
+  stopifnot(comment$getString()$toString()=="Cogito")
+
+  # don't forget to save your workbook!
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

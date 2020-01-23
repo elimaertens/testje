@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to manipulate cells.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for CellStyle {xlsx}"><tr><td>CellStyle {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to manipulate cells.</h2>
+
+<h3>Description</h3>
+
+<p>Create and set cell styles. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+## Default S3 method:
+CellStyle(wb, dataFormat=NULL, alignment=NULL,
+  border=NULL, fill=NULL, font=NULL, cellProtection=NULL)
+
+setCellStyle(cell, cellStyle)
+
+getCellStyle(cell)
+
+is.CellStyle(x)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>wb</code></td>
+<td>
+<p>a workbook object as returned by
+<code><a href="Workbook.html">createWorkbook</a></code> or <code><a href="Workbook.html">loadWorkbook</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>dataFormat</code></td>
+<td>
+<p>a <code><a href="DataFormat.html">DataFormat</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>alignment</code></td>
+<td>
+<p>a <code><a href="Alignment.html">Alignment</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>border</code></td>
+<td>
+<p>a <code><a href="Border.html">Border</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>a <code><a href="Fill.html">Fill</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>font</code></td>
+<td>
+<p>a <code><a href="Font.html">Font</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>cellProtection</code></td>
+<td>
+<p>a <code><a href="CellProtection.html">CellProtection</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a <code>CellStyle</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>cell</code></td>
+<td>
+<p>a <code><a href="Cell.html">Cell</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>cellStyle</code></td>
+<td>
+<p>a <code>CellStyle</code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>arguments to <code>CellStyle.default</code>.</p>
+</td></tr> 
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>setCellStyle</code> sets the <code>CellStyle</code> to one <code>Cell</code>
+object.
+</p>
+<p>You need to have a <code>Workbook</code> object to attach  a
+<code>CellStyle</code> object to it.
+</p>
+<p>Since OS X 10.5 Apple dropped support for AWT on the main thread,  
+so essentially you cannot use any graphics classes in R on OS X 10.5  
+since R is single-threaded. (verbatim from Simon Urbanek).  This
+implies that setting colors on Mac will not work as is!  A set of
+about 50 basic colors are still available please see the javadocs. 
+</p>
+<p>For Excel 95/2000/XP/2003 the choice of colors is limited.  See
+<code>INDEXED_COLORS_</code> for the list of available colors.  
+</p>
+<p>Unspecified values for arguments are taken from the system locale.    
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>createCellStyle</code> creates a CellStyle object.
+</p>
+<p><code>is.CellStyle</code> returns <code>TRUE</code> if the argument is of class
+&quot;CellStyle&quot; and <code>FALSE</code> otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+  wb &lt;- createWorkbook()
+  sheet &lt;- createSheet(wb, "Sheet1")
+
+  rows  &lt;- createRow(sheet, rowIndex=1)    
+
+  cell.1 &lt;- createCell(rows, colIndex=1)[[1,1]]     
+  setCellValue(cell.1, "Hello R!")
+
+  cs &lt;- CellStyle(wb) +
+    Font(wb, heightInPoints=20, isBold=TRUE, isItalic=TRUE,
+      name="Courier New", color="orange") + 
+    Fill(backgroundColor="lavender", foregroundColor="lavender",
+      pattern="SOLID_FOREGROUND") +
+    Alignment(h="ALIGN_RIGHT")
+   
+  setCellStyle(cell.1, cellStyle1)  
+
+  # you need to save the workbook now if you want to see this art
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

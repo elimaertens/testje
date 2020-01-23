@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: CellStyle construction.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for &amp;quot;+.CellStyle&amp;quot; {xlsx}"><tr><td>&quot;+.CellStyle&quot; {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>CellStyle construction.</h2>
+
+<h3>Description</h3>
+
+<p>Create cell styles. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+## S3 method for class 'CellStyle'
+cs1 + object
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>cs1</code></td>
+<td>
+<p>a <code><a href="CellStyle.html">CellStyle</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>object</code></td>
+<td>
+<p>an object to add.  The object can be another
+<code><a href="CellStyle.html">CellStyle</a></code>, a <code><a href="DataFormat.html">DataFormat</a></code>, a
+<code><a href="Alignment.html">Alignment</a></code>, a <code><a href="Border.html">Border</a></code>, a
+<code><a href="Fill.html">Fill</a></code>, a <code><a href="Font.html">Font</a></code>, or a
+<code><a href="CellProtection.html">CellProtection</a></code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>The style of the argument object takes precedence over the style of
+argument cs1.  
+</p>
+
+
+<h3>Value</h3>
+
+<p>A CellStyle object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+  cs &lt;- CellStyle(wb) +
+    Font(wb, heightInPoints=20, isBold=TRUE, isItalic=TRUE,
+      name="Courier New", color="orange") + 
+    Fill(backgroundColor="lavender", foregroundColor="lavender",
+      pattern="SOLID_FOREGROUND") +
+    Alignment(h="ALIGN_RIGHT")
+   
+  setCellStyle(cell.1, cellStyle1)  
+
+  # you need to save the workbook now if you want to see this art
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

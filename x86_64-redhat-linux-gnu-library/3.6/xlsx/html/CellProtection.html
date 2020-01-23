@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create a CellProtection object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for CellProtection {xlsx}"><tr><td>CellProtection {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create a CellProtection object.</h2>
+
+<h3>Description</h3>
+
+<p>Create a CellProtection object used for cell styles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+CellProtection(locked=TRUE, hidden=FALSE)
+
+is.CellProtection(x)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>locked</code></td>
+<td>
+<p>a logical indicating the cell is locked.</p>
+</td></tr>
+<tr valign="top"><td><code>hidden</code></td>
+<td>
+<p>a logical indicating the cell is hidden.</p>
+</td></tr>
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>A CellProtection object, as returned by <code>CellProtection</code>. </p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>CellProtection</code> returns a list with components from the input
+argument, and a class attribute &quot;CellProtection&quot;.  CellProtection
+objects are used when constructing cell styles.
+</p>
+<p><code>is.CellProtection</code> returns <code>TRUE</code> if the argument is of class
+&quot;CellProtection&quot; and <code>FALSE</code> otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="CellStyle.html">CellStyle</a></code> for using the a <code>CellProtection</code> object.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+  font &lt;-  CellProtection(locked=TRUE)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

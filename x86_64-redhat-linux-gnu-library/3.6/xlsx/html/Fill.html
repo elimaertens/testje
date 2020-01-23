@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Create an Fill object.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Fill {xlsx}"><tr><td>Fill {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Create an Fill object.</h2>
+
+<h3>Description</h3>
+
+<p>Create an Fill object, useful when working with cell styles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+Fill(foregroundColor="lightblue", backgroundColor="lightblue",
+  pattern="SOLID_FOREGROUND")
+
+is.Fill(x)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>foregroundColor</code></td>
+<td>
+<p>a character vector specifiying the foreground
+color.  Any color names as returned by
+<code><a href="../../grDevices/html/colors.html">colors</a></code> can be used.   Or, a hex character,
+e.g. &quot;#FF0000&quot; for red.  For Excel 95 
+workbooks, only a subset of colors is available, see the constant
+<code>INDEXED_COLORS_</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>backgroundColor</code></td>
+<td>
+<p>a character vector specifiying the foreground
+color.  Any color names as returned by
+<code><a href="../../grDevices/html/colors.html">colors</a></code> can be used.   Or, a hex character,
+e.g. &quot;#FF0000&quot; for red.  For Excel 95
+workbooks, only a subset of colors is available, see the constant
+<code>INDEXED_COLORS_</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>pattern</code></td>
+<td>
+<p>a character vector specifying the fill pattern style.
+Valid values come from constant <code>FILL_STYLES_</code>.</p>
+</td></tr> 
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>a Fill object, as returned by <code>Fill</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p><code>Fill</code> returns a list with components from the input
+argument, and a class attribute &quot;Fill&quot;.  Fill objects are
+used when constructing cell styles.
+</p>
+<p><code>is.Fill</code> returns <code>TRUE</code> if the argument is of class
+&quot;Fill&quot; and <code>FALSE</code> otherwise.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="CellStyle.html">CellStyle</a></code> for using the a <code>Fill</code> object.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+  fill &lt;-  Fill()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

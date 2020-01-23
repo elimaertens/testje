@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Function to manipulate print setup.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for PrintSetup {xlsx}"><tr><td>PrintSetup {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Function to manipulate print setup.</h2>
+
+<h3>Description</h3>
+
+<p>Function to manipulate print setup. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+printSetup(sheet, fitHeight=NULL,
+  fitWidth=NULL, copies=NULL, draft=NULL, footerMargin=NULL,
+  headerMargin=NULL, landscape=FALSE, pageStart=NULL, paperSize=NULL,
+  noColor=NULL)
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+<p>a worksheet object <code><a href="Sheet.html">Worksheet</a></code>.</p>
+</td></tr>
+<tr valign="top"><td><code>fitHeight</code></td>
+<td>
+<p>numeric value to set the number of pages high to fit
+the sheet in.</p>
+</td></tr>
+<tr valign="top"><td><code>fitWidth</code></td>
+<td>
+<p>numeric value to set the number of pages wide to fit
+the sheet in.</p>
+</td></tr>
+<tr valign="top"><td><code>copies</code></td>
+<td>
+<p>numeric value to set the number of copies.</p>
+</td></tr>
+<tr valign="top"><td><code>draft</code></td>
+<td>
+<p>logical indicating if it's a draft or not.</p>
+</td></tr>
+<tr valign="top"><td><code>footerMargin</code></td>
+<td>
+<p>numeric value to set the footer margin.</p>
+</td></tr>
+<tr valign="top"><td><code>headerMargin</code></td>
+<td>
+<p>numeric value to set the header margin.</p>
+</td></tr>
+<tr valign="top"><td><code>landscape</code></td>
+<td>
+<p>logical value to specify the paper orientation.</p>
+</td></tr>
+<tr valign="top"><td><code>pageStart</code></td>
+<td>
+<p>numeric value from where to start the page
+numbering.</p>
+</td></tr>
+<tr valign="top"><td><code>paperSize</code></td>
+<td>
+<p>character to set the paper size.  Valid values are
+&quot;A4_PAPERSIZE&quot;, &quot;A5_PAPERSIZE&quot;, &quot;ENVELOPE_10_PAPERSIZE&quot;,
+&quot;ENVELOPE_CS_PAPERSIZE&quot;, &quot;ENVELOPE_DL_PAPERSIZE&quot;,
+&quot;ENVELOPE_MONARCH_PAPERSIZE&quot;, &quot;EXECUTIVE_PAPERSIZE&quot;, &quot;LEGAL_PAPERSIZE&quot;,
+&quot;LETTER_PAPERSIZE&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>noColor</code></td>
+<td>
+<p>logical value to indicate if the prints should be color
+or not.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>Other settings are available but not exposed.  Please see the java
+docs. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>A reference to a java PrintSetup object.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+wb &lt;- createWorkbook()
+sheet &lt;- createSheet(wb, "Sheet1")
+ps   &lt;- printSetup(sheet, landscape=TRUE, copies=3)
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

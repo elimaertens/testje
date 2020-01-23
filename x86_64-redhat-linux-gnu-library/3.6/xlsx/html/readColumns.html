@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Read a contiguous set of columns from sheet into an R...</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for readColumns {xlsx}"><tr><td>readColumns {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2> Read a contiguous set of columns from sheet into an R data.frame</h2>
+
+<h3>Description</h3>
+
+<p>Read a contiguous set of columns from sheet into an R data.frame.
+Uses the <code>RInterface</code> for speed.   
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+readColumns(sheet, startColumn, endColumn, startRow,
+  endRow=NULL, as.data.frame=TRUE, header=TRUE, colClasses=NA,
+  ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>sheet</code></td>
+<td>
+<p>a <code><a href="Sheet.html">Worksheet</a></code> object.</p>
+</td></tr>
+<tr valign="top"><td><code>startColumn</code></td>
+<td>
+<p>a numeric value for the starting column.</p>
+</td></tr>
+<tr valign="top"><td><code>endColumn</code></td>
+<td>
+<p>a numeric value for the ending column.</p>
+</td></tr>
+<tr valign="top"><td><code>startRow</code></td>
+<td>
+<p>a numeric value for the starting row.</p>
+</td></tr>
+<tr valign="top"><td><code>endRow</code></td>
+<td>
+<p>a numeric value for the ending row.  If <code>NULL</code> it
+reads all the rows in the sheet.  If you request more than the
+existing rows in the sheet, the result will be truncated by the
+actual row number.</p>
+</td></tr>
+<tr valign="top"><td><code>as.data.frame</code></td>
+<td>
+<p>a logical value indicating if the result should
+be coerced into a <code>data.frame</code>.  If <code>FALSE</code>, the result is
+a list with one element for each column.</p>
+</td></tr>
+<tr valign="top"><td><code>header</code></td>
+<td>
+<p>a logical value indicating whether the first row
+corresponding to the first element of the <code>rowIndex</code> vector
+contains the names of the variables.</p>
+</td></tr>
+<tr valign="top"><td><code>colClasses</code></td>
+<td>
+<p>a character vector that represents the class of each
+column.  Recycled as necessary, or if <code>NA</code> an attempt is made
+to guess the type of each column by reading the first row of data.
+Only <code>numeric</code>, <code>character</code>, <code>Date</code>, <code>POSIXct</code>,
+column types are accepted.  Anything else will be coverted to a
+<code>character</code> type.  If the length is less than the number of
+columns requested, replicate it.</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>other arguments to <code>data.frame</code>, for example
+<code>stringsAsFactors</code></p>
+</td></tr> 
+</table>
+
+
+<h3>Details</h3>
+
+<p>Use the <code>readColumns</code> function when you want to read a rectangular
+block of data from an Excel worksheet.  If you request columns which
+are blank, these will be read in as empty character &quot;&quot; columns.
+Internally, the loop over columns is done in R, the loop over rows is
+done in Java, so this function achieves good performance when number of
+rows &gt;&gt; number of columns. 
+</p>
+<p>Excel internally stores dates and datetimes as numeric values, and does
+not keep track of time zones and DST.  When a numeric column is
+formatted as a datetime, it will be converted into <code>POSIXct</code> class
+with a <em>GMT</em> timezone.  If you need a <code>Date</code> column, you need
+to specify explicitly using <code>colClasses</code> argument.
+</p>
+<p>For a numeric column Excels's errors and blank cells will be returned as
+NaN values.  Excel's <code>#N/A</code> will be returned as NA.  Formulas will be
+evaluated. For a chracter column, blank cells will be returned as &quot;&quot;. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data.frame or a list, depending on the <code>as.data.frame</code>
+argument. 
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Adrian Dragulescu </p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="read.xlsx.html">read.xlsx2</a></code> for reading entire sheets.
+See also <code><a href="addDataFrame.html">addDataFrame</a></code> for writing a <code>data.frame</code> to a
+sheet.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+
+  file &lt;- system.file("tests", "test_import.xlsx", package = "xlsx")
+
+  wb     &lt;- loadWorkbook(file)
+  sheets &lt;- getSheets(wb)
+
+  sheet &lt;- sheets[["all"]]
+  res &lt;- readColumns(sheet, startColumn=3, endColumn=10, startRow=3,
+    endRow=7)
+
+  sheet &lt;- sheets[["NAs"]]
+  res &lt;- readColumns(sheet, 1, 6, 1,  colClasses=c("Date", "character",
+    "integer", rep("numeric", 2),  "POSIXct"))
+ 
+
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>

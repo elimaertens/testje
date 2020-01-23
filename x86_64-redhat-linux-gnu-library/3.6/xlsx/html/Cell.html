@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Functions to manipulate cells.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for Cell {xlsx}"><tr><td>Cell {xlsx}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Functions to manipulate cells.</h2>
+
+<h3>Description</h3>
+
+<p>Functions to manipulate cells. 
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+
+createCell(row, colIndex=1:5)
+
+getCells(row, colIndex=NULL, simplify=TRUE)
+
+setCellValue(cell, value, richTextString=FALSE, showNA=TRUE)
+
+getCellValue(cell, keepFormulas=FALSE, encoding="unknown")
+
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>row</code></td>
+<td>
+<p>a list of row objects. See <code>Row</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>colIndex</code></td>
+<td>
+<p>a numeric vector specifying the index of columns.</p>
+</td></tr>
+<tr valign="top"><td><code>simplify</code></td>
+<td>
+<p>a logical value.  If <code>TRUE</code>, the result will be
+unlisted.</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>an R variable of length one.</p>
+</td></tr>
+<tr valign="top"><td><code>richTextString</code></td>
+<td>
+<p>a logical value indicating if the value should
+be inserted into the Excel cell as rich text.</p>
+</td></tr>
+<tr valign="top"><td><code>showNA</code></td>
+<td>
+<p>a logical value.  If <code>TRUE</code> the cell will contain
+the &quot;#N/A&quot; value, if <code>FALSE</code> they will be skipped.  The default
+value was chosen to remain compatible with previous versions of the
+function.</p>
+</td></tr>
+<tr valign="top"><td><code>keepFormulas</code></td>
+<td>
+<p>a logical value.  If <code>TRUE</code> the formulas will 
+be returned as characters instead of being explicitly evaluated.</p>
+</td></tr>
+<tr valign="top"><td><code>encoding</code></td>
+<td>
+<p>A character value to set the encoding, for example &quot;UTF-8&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>cell</code></td>
+<td>
+<p>a <code>Cell</code> object.</p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p><code>setCellValue</code> writes the content of an R variable into the cell.
+<code>Date</code> and <code>POSIXct</code> objects are passed in as numerical
+values.  To format them as dates in Excel see <code><a href="CellStyle.html">CellStyle</a></code>.
+</p>
+<p>These functions are not vectorized and should be used only for small
+spreadsheets.  Use <code>CellBlock</code> functionality to efficiently
+read/write parts of a spreadsheet. 
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>createCell</code> creates a matrix of lists, each element of the list
+being a java object reference to an object of type Cell representing
+an empty cell.  The dimnames of this matrix are taken from the names
+of the rows and the <code>colIndex</code> variable.
+</p>
+<p><code>getCells</code> returns a list of java object references for all the
+cells in the row if <code>colIndex</code> is <code>NULL</code>.  If you want to
+extract only a specific columns, set <code>colIndex</code> to the column 
+indices you are interested.
+</p>
+<p><code>getCellValue</code> returns the value in the cell as an R object.
+Type conversions are done behind the scene.  This function is not
+vectorized.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adrian Dragulescu</p>
+
+
+<h3>See Also</h3>
+
+<p>To format cells, see <code><a href="CellStyle.html">CellStyle</a></code>.  For rows see
+<code><a href="Row.html">Row</a></code>, for sheets see <code><a href="Sheet.html">Sheet</a></code>.</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+
+file &lt;- system.file("tests", "test_import.xlsx", package = "xlsx")
+
+wb &lt;- loadWorkbook(file)  
+sheets &lt;- getSheets(wb)
+
+sheet &lt;- sheets[['mixedTypes']]      # get second sheet
+rows  &lt;- getRows(sheet)   # get all the rows
+
+cells &lt;- getCells(rows)   # returns all non empty cells
+
+values &lt;- lapply(cells, getCellValue) # extract the values
+
+# write the months of the year in the first column of the spreadsheet
+ind &lt;- paste(2:13, ".2", sep="")
+mapply(setCellValue, cells[ind], month.name)
+
+####################################################################
+# make a new workbook with one sheet and 5x5 cells
+wb &lt;- createWorkbook()
+sheet &lt;- createSheet(wb, "Sheet1")
+rows  &lt;- createRow(sheet, rowIndex=1:5)
+cells &lt;- createCell(rows, colIndex=1:5) 
+
+# populate the first column with Dates
+days &lt;- seq(as.Date("2013-01-01"), by="1 day", length.out=5)
+mapply(setCellValue, cells[,1], days)
+
+ 
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>xlsx</em> version 0.6.1 <a href="00Index.html">Index</a>]</div>
+</body></html>
